@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reviews Speak Louder Than Resumes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: white;
+        padding: 50px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: black;
+      }
+
+      h1 span {
+        color: goldenrod;
+        font-weight: 700;
+      }
+
+      .review-container {
+        position: relative;
+        width: 450px;
+        height: 250px;
+        margin: 40px auto 0;
+        perspective: 1000px;
+      }
+
+      .review {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 30px gold;
+        border-radius: 10px;
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+        opacity: 0;
+        transition: all 0.8s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.2rem;
+        z-index: 1;
+      }
+
+      .review .stars {
+        color: gold;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+
+      .review.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) rotate(0deg) scale(1.05);
+        z-index: 5;
+      }
+
+      .review.behind-1 {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(20px) rotate(-2deg);
+        z-index: 4;
+      }
+
+      .review.behind-2 {
+        opacity: 0.6;
+        transform: translateX(-50%) translateY(40px) rotate(2deg);
+        z-index: 3;
+      }
+
+      .review.behind-3 {
+        opacity: 0.4;
+        transform: translateX(-50%) translateY(60px) rotate(-3deg);
+        z-index: 2;
+      }
+
+      .review.behind-4 {
+        opacity: 0.2;
+        transform: translateX(-50%) translateY(80px) rotate(1deg);
+        z-index: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Reviews <span>speak louder than</span> resumes</h1>
+
+    <div class="review-container" id="reviewContainer">
+      <div class="review active">
+        <div class="stars">★★★★★</div>
+        Got my site #1 on Google!
+      </div>
+      <div class="review behind-1">
+        <div class="stars">★★★★★</div>
+        Best hire we've made all year!
+      </div>
+      <div class="review behind-2">
+        <div class="stars">★★★★★</div>
+        Solved problems we didn't know we had.
+      </div>
+      <div class="review behind-3">
+        <div class="stars">★★★★★</div>
+        Surpassed every expectation we set.
+      </div>
+      <div class="review behind-4">
+        <div class="stars">★★★★★</div>
+        Worth every penny and more!
+      </div>
+    </div>
+
+    <script>
+      const reviews = document.querySelectorAll(".review");
+      let current = 0;
+
+      function updateReviews() {
+        reviews.forEach((review, index) => {
+          review.className = "review"; // Reset classes
+        });
+
+        reviews[current].classList.add("active");
+        reviews[(current + 1) % reviews.length].classList.add("behind-1");
+        reviews[(current + 2) % reviews.length].classList.add("behind-2");
+        reviews[(current + 3) % reviews.length].classList.add("behind-3");
+        reviews[(current + 4) % reviews.length].classList.add("behind-4");
+      }
+
+      updateReviews();
+
+      setInterval(() => {
+        current = (current + 1) % reviews.length;
+        updateReviews();
+      }, 3000);
+    </script>
+  </body>
+</html>
